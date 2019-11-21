@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -12,15 +13,11 @@ public class LoginServiceTest {
 
     ArrayList<String> loginsExistants;
     LoginService service;
-    String[] logins = new String[2];
+    String[] logins;
 
     @Before
     public void setUp() throws Exception {
-        loginsExistants.add("azer");
-        loginsExistants.add("qwer");
-        loginsExistants.add("azor");
-        logins[0] = loginsExistants.get(0);
-        logins[1] = loginsExistants.get(1);
+        logins = new String[] {"azer","qwer","azor"};
         service = new LoginService(logins);
     }
 
@@ -33,8 +30,8 @@ public class LoginServiceTest {
         login1 = "azer";
         login2 = "xcar";
         //Then
-        assertEquals(true, service.loginExists(login1));
-        assertEquals(false, service.loginExists(login2));
+        assertTrue(service.loginExists(login1));
+        assertFalse(service.loginExists(login2));
 
     }
 
@@ -53,21 +50,23 @@ public class LoginServiceTest {
     public void findAllLoginsStartingWith() {
         //Given
         String pref;
-        ArrayList<String> liste = new ArrayList<>();
+        ArrayList<String> liste = new ArrayList<String>();
         //When
         pref = "az";
-        liste.add(loginsExistants.get(0)); liste.add(loginsExistants.get(2));
+        liste.add("azer");
+        liste.add("azor");
         //Then
         assertEquals(liste, service.findAllLoginsStartingWith(pref));
     }
 
     @Test
     public void findAllLogins() {
-        ArrayList<String> tous = new ArrayList<>();
+        ArrayList<String> tous = new ArrayList<String>();
 
-        tous.add(loginsExistants.get(0));
-        tous.add(loginsExistants.get(1));
-        tous.add(loginsExistants.get(2));
+        tous.add("azer");
+        tous.add("qwer");
+        tous.add("azor");
+        Collections.sort(tous);
 
         assertEquals(tous, service.findAllLogins());
     }
