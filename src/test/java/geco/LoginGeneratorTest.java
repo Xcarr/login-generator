@@ -10,7 +10,7 @@ public class LoginGeneratorTest {
 
     LoginService loginService;
     LoginGenerator generator;
-    String nom, prenom, nom1, prenom1;
+    String nom, prenom, nom1, prenom1, nom2;
 
     @Before
     public void setUp() throws Exception {
@@ -23,15 +23,18 @@ public class LoginGeneratorTest {
         //Given
         nom = "Durand";
         prenom = "Paul";
-        nom1 = "Pernaud";
-        prenom1 = "Bill";
+        nom1 = "Rolling";
+        prenom1 = "Jean";
+        nom2 = "Dùrand";
         //When
         generator = new LoginGenerator(loginService);
         //Then
         assertEquals("PDUR",
                 generator.generateLoginForNomAndPrenom(nom, prenom));
-        assertEquals("BPER1",
+        assertEquals("JROL1",
                 generator.generateLoginForNomAndPrenom(nom1, prenom1));
+        assertEquals("PDUR1",
+                generator.generateLoginForNomAndPrenom(nom2, prenom));
     }
 
 }
